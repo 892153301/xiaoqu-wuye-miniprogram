@@ -1,0 +1,70 @@
+<!-- 个人中心页面 -->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-header">
+    <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+      <image class="avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"/>
+    </button>
+    <view class="user-info">
+      <text class="nickname">{{userInfo.nickName || '点击设置昵称'}}</text>
+      <text class="house-info" wx:if="{{residentInfo}}">{{residentInfo.building}} {{residentInfo.unit}} {{residentInfo.room}}</text>
+      <text class="bind-tip" wx:else bindtap="bindHouse">点击绑定房屋 ></text>
+    </view>
+  </view>
+
+  <!-- 快捷入口 -->
+  <view class="quick-menu">
+    <view class="menu-row">
+      <view class="menu-item" bindtap="goPayment">
+        <text class="menu-icon">💰</text>
+        <text class="menu-text">物业缴费</text>
+      </view>
+      <view class="menu-item" bindtap="goRepair">
+        <text class="menu-icon">🔧</text>
+        <text class="menu-text">报修工单</text>
+      </view>
+      <view class="menu-item" bindtap="goVisitor">
+        <text class="menu-icon">🚗</text>
+        <text class="menu-text">访客预约</text>
+      </view>
+      <view class="menu-item" bindtap="goComplaint">
+        <text class="menu-icon">📝</text>
+        <text class="menu-text">投诉建议</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能列表 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="goFamily">
+      <text class="function-icon">👨‍👩‍👧</text>
+      <text class="function-text">家庭成员</text>
+      <text class="function-arrow">></text>
+    </view>
+    <view class="function-item" bindtap="goHistory">
+      <text class="function-icon">📋</text>
+      <text class="function-text">缴费记录</text>
+      <text class="function-arrow">></text>
+    </view>
+    <view class="function-item" bindtap="goNotice">
+      <text class="function-icon">📢</text>
+      <text class="function-text">我的消息</text>
+      <text class="badge" wx:if="{{unreadCount > 0}}">{{unreadCount}}</text>
+      <text class="function-arrow" wx:else>></text>
+    </view>
+  </view>
+
+  <!-- 设置 -->
+  <view class="function-list">
+    <view class="function-item" bindtap="contactService">
+      <text class="function-icon">📞</text>
+      <text class="function-text">联系物业</text>
+      <text class="function-arrow">></text>
+    </view>
+    <view class="function-item" bindtap="showAbout">
+      <text class="function-icon">ℹ️</text>
+      <text class="function-text">关于我们</text>
+      <text class="function-arrow">></text>
+    </view>
+  </view>
+</view>

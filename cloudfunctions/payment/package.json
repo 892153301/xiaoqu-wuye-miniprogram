@@ -1,0 +1,9 @@
+{
+  "name": "payment",
+  "version": "1.0.0",
+  "description": "物业费缴纳",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~3.0.0"
+  }
+}

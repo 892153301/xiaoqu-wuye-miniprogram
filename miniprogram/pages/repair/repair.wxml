@@ -1,0 +1,77 @@
+<!-- 报修工单页面 -->
+<view class="container">
+  <!-- 提交工单表单 -->
+  <view class="form-card" wx:if="{{showForm}}">
+    <view class="form-title">提交报修</view>
+    
+    <view class="form-item">
+      <text class="label">报修类型</text>
+      <picker mode="selector" range="{{repairTypes}}" range-key="name" bindchange="onTypeChange">
+        <view class="picker {{form.type ? '' : 'placeholder'}}">
+          {{form.typeName || '请选择报修类型'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">问题描述</text>
+      <textarea 
+        class="textarea" 
+        placeholder="请详细描述您遇到的问题..."
+        maxlength="500"
+        bindinput="onDescriptionInput"
+        value="{{form.description}}"
+      />
+      <text class="char-count">{{form.description.length}}/500</text>
+    </view>
+
+    <view class="form-item">
+      <text class="label">预约时间</text>
+      <picker mode="multiSelector" range="{{timeRange}}" bindchange="onTimeChange">
+        <view class="picker {{form.appointmentTime ? '' : 'placeholder'}}">
+          {{form.appointmentTime || '请选择预约上门时间'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">上传图片</text>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{form.images}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"/>
+          <text class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</text>
+        </view>
+        <view class="upload-btn" bindtap="chooseImage" wx:if="{{form.images.length < 6}}">
+          <text class="icon">+</text>
+          <text class="tip">{{form.images.length}}/6</text>
+        </view>
+      </view>
+    </view>
+
+    <button class="btn-submit" bindtap="submitRepair">提交工单</button>
+    <button class="btn-cancel" bindtap="toggleForm">取消</button>
+  </view>
+
+  <!-- 工单列表 -->
+  <view class="list-section" wx:if="{{!showForm}}">
+    <button class="btn-new" bindtap="toggleForm">+ 新建报修工单</button>
+    
+    <view class="repair-list">
+      <view class="repair-card" wx:for="{{repairs}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <view class="repair-header">
+          <text class="repair-type">{{item.typeName}}</text>
+          <text class="repair-status {{item.status}}">{{item.statusText}}</text>
+        </view>
+        <text class="repair-desc">{{item.description}}</text>
+        <view class="repair-footer">
+          <text class="repair-time">{{item.createTime}}</text>
+          <text class="repair-no">工单号：{{item.orderNo}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{repairs.length === 0}}">
+      <text>暂无报修记录</text>
+    </view>
+  </view>
+</view>

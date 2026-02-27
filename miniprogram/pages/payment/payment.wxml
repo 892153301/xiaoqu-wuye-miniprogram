@@ -1,0 +1,53 @@
+<!-- 物业费缴纳页面 -->
+<view class="container">
+  <view class="house-info-card">
+    <text class="label">缴费房屋</text>
+    <text class="value">{{residentInfo.building}} {{residentInfo.unit}} {{residentInfo.room}}</text>
+    <text class="owner">业主：{{residentInfo.name}}</text>
+  </view>
+
+  <view class="bill-section" wx:if="{{unpaidBills.length > 0}}">
+    <view class="section-title">待缴费账单</view>
+    <view class="bill-list">
+      <view class="bill-card" wx:for="{{unpaidBills}}" wx:key="id">
+        <view class="bill-header">
+          <text class="bill-type">{{item.type}}</text>
+          <text class="bill-status unpaid">待缴纳</text>
+        </view>
+        <view class="bill-period">{{item.period}}</view>
+        <view class="bill-amount-row">
+          <text class="amount-label">应缴金额</text>
+          <text class="amount-value">¥{{item.amount}}</text>
+        </view>
+        <view class="bill-deadline">缴费截止：{{item.deadline}}</view>
+        <button class="btn-pay" bindtap="goPay" data-id="{{item.id}}">立即缴费</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="bill-section" wx:if="{{paidBills.length > 0}}">
+    <view class="section-title">已缴费账单</view>
+    <view class="bill-list">
+      <view class="bill-card paid" wx:for="{{paidBills}}" wx:key="id">
+        <view class="bill-header">
+          <text class="bill-type">{{item.type}}</text>
+          <text class="bill-status paid">已缴纳</text>
+        </view>
+        <view class="bill-period">{{item.period}}</view>
+        <view class="bill-amount-row">
+          <text class="amount-label">实缴金额</text>
+          <text class="amount-value">¥{{item.amount}}</text>
+        </view>
+        <view class="bill-meta">
+          <text>缴费时间：{{item.payTime}}</text>
+          <text>支付方式：{{item.payMethod}}</text>
+        </view>
+        <button class="btn-invoice" bindtap="downloadInvoice" data-id="{{item.id}}">下载发票</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{unpaidBills.length === 0 && paidBills.length === 0}}">
+    <text>暂无账单</text>
+  </view>
+</view>

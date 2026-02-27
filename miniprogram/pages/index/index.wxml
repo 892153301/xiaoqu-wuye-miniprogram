@@ -1,0 +1,91 @@
+<!-- 首页 -->
+<view class="container">
+  <!-- 轮播公告 -->
+  <swiper class="banner" indicator-dots autoplay circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id" bindtap="goNoticeDetail" data-id="{{item.id}}">
+      <image src="{{item.imageUrl}}" mode="aspectFill"/>
+      <view class="banner-title">{{item.title}}</view>
+    </swiper-item>
+  </swiper>
+
+  <!-- 快捷入口 -->
+  <view class="quick-entry">
+    <view class="entry-item" bindtap="goPayment">
+      <view class="entry-icon payment">
+        <text class="iconfont">💰</text>
+      </view>
+      <text class="entry-text">物业缴费</text>
+      <view class="badge" wx:if="{{unpaidCount > 0}}">{{unpaidCount}}</view>
+    </view>
+    <view class="entry-item" bindtap="goRepair">
+      <view class="entry-icon repair">
+        <text class="iconfont">🔧</text>
+      </view>
+      <text class="entry-text">报修工单</text>
+    </view>
+    <view class="entry-item" bindtap="goVisitor">
+      <view class="entry-icon visitor">
+        <text class="iconfont">🚗</text>
+      </view>
+      <text class="entry-text">访客预约</text>
+    </view>
+    <view class="entry-item" bindtap="goComplaint">
+      <view class="entry-icon complaint">
+        <text class="iconfont">📝</text>
+      </view>
+      <text class="entry-text">投诉建议</text>
+    </view>
+  </view>
+
+  <!-- 待办提醒 -->
+  <view class="todo-section" wx:if="{{unpaidBills.length > 0}}">
+    <view class="section-header">
+      <text class="section-title">待缴费</text>
+      <text class="more" bindtap="goPayment">查看全部 ></text>
+    </view>
+    <view class="bill-item" wx:for="{{unpaidBills}}" wx:key="id" bindtap="goPay" data-id="{{item.id}}">
+      <view class="bill-info">
+        <text class="bill-type">{{item.type}}</text>
+        <text class="bill-period">{{item.period}}</text>
+      </view>
+      <view class="bill-amount">
+        <text class="amount">¥{{item.amount}}</text>
+        <text class="status unpaid">待缴纳</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 最新公告 -->
+  <view class="notice-section">
+    <view class="section-header">
+      <text class="section-title">最新公告</text>
+      <text class="more" bindtap="goNoticeList">更多 ></text>
+    </view>
+    <view class="notice-list">
+      <view class="notice-item" wx:for="{{notices}}" wx:key="id" bindtap="goNoticeDetail" data-id="{{item.id}}">
+        <view class="notice-tag" wx:if="{{item.isTop}}">置顶</view>
+        <view class="notice-tag notice" wx:if="{{item.category === 'notice'}}">通知</view>
+        <view class="notice-tag maintain" wx:if="{{item.category === 'maintain'}}">维修</view>
+        <view class="notice-tag activity" wx:if="{{item.category === 'activity'}}">活动</view>
+        <text class="notice-title">{{item.title}}</text>
+        <text class="notice-time">{{item.publishTime}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 房屋信息卡片 -->
+  <view class="house-card" wx:if="{{residentInfo}}">
+    <view class="house-header">
+      <text class="house-title">我的房屋</text>
+      <text class="house-status">{{residentInfo.status}}</text>
+    </view>
+    <view class="house-info">
+      <text class="house-address">{{residentInfo.building}} {{residentInfo.unit}} {{residentInfo.room}}</text>
+      <text class="house-area">{{residentInfo.area}}㎡</text>
+    </view>
+    <view class="house-owner">
+      <text>业主：{{residentInfo.name}}</text>
+      <text>电话：{{residentInfo.phone}}</text>
+    </view>
+  </view>
+</view>

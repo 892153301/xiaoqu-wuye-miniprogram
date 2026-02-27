@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/notice/notice",
+    "pages/notice/detail",
+    "pages/payment/payment",
+    "pages/payment/pay",
+    "pages/repair/repair",
+    "pages/repair/detail",
+    "pages/visitor/visitor",
+    "pages/visitor/record",
+    "pages/complaint/complaint",
+    "pages/complaint/detail",
+    "pages/mine/mine"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#07c160",
+    "navigationBarTitleText": "智慧社区",
+    "navigationBarTextStyle": "white",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/notice/notice",
+        "text": "公告",
+        "iconPath": "images/notice.png",
+        "selectedIconPath": "images/notice-active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "images/mine.png",
+        "selectedIconPath": "images/mine-active.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "cloud": true
+}

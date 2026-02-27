@@ -1,0 +1,78 @@
+<!-- 投诉建议页面 -->
+<view class="container">
+  <view class="form-card">
+    <view class="form-title">投诉建议</view>
+    
+    <view class="type-tabs">
+      <view class="type-tab {{form.type === 'complaint' ? 'active' : ''}}" bindtap="setType" data-type="complaint">
+        投诉
+      </view>
+      <view class="type-tab {{form.type === 'suggestion' ? 'active' : ''}}" bindtap="setType" data-type="suggestion">
+        建议
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">{{form.type === 'complaint' ? '投诉' : '建议'}}内容</text>
+      <textarea 
+        class="textarea" 
+        placeholder="请详细描述您的{{form.type === 'complaint' ? '投诉' : '建议'}}内容..."
+        maxlength="500"
+        value="{{form.content}}"
+        bindinput="onContentInput"
+      />
+      <text class="char-count">{{form.content.length}}/500</text>
+    </view>
+
+    <view class="form-item">
+      <text class="label">上传图片（选填）</text>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{form.images}}" wx:key="index">
+          <image src="{{item}}" mode="aspectFill" bindtap="previewImage" data-url="{{item}}"/>
+          <text class="delete-btn" bindtap="deleteImage" data-index="{{index}}">×</text>
+        </view>
+        <view class="upload-btn" bindtap="chooseImage" wx:if="{{form.images.length < 4}}">
+          <text class="icon">+</text>
+          <text class="tip">{{form.images.length}}/4</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">联系方式（选填）</text>
+      <input 
+        class="input" 
+        placeholder="如需回访请填写手机号"
+        value="{{form.contact}}"
+        bindinput="onContactInput"
+      />
+    </view>
+
+    <button class="btn-submit" bindtap="submitComplaint">提交</button>
+  </view>
+
+  <!-- 历史记录 -->
+  <view class="history-section">
+    <view class="section-title">处理进度</view>
+    <view class="history-list">
+      <view class="history-card" wx:for="{{history}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <view class="history-header">
+          <view class="history-tags">
+            <text class="tag-type {{item.type}}">{{item.typeText}}</text>
+            <text class="tag-status {{item.status}}">{{item.statusText}}</text>
+          </view>
+          <text class="history-time">{{item.createTime}}</text>
+        </view>
+        <text class="history-content">{{item.content}}</text>
+        <view class="history-reply" wx:if="{{item.reply}}">
+          <text class="reply-label">物业回复：</text>
+          <text class="reply-text">{{item.reply}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="empty-state" wx:if="{{history.length === 0}}">
+      <text>暂无记录</text>
+    </view>
+  </view>
+</view>

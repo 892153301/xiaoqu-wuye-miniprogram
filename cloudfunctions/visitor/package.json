@@ -1,0 +1,9 @@
+{
+  "name": "visitor",
+  "version": "1.0.0",
+  "description": "访客预约管理",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~3.0.0"
+  }
+}

@@ -1,0 +1,118 @@
+.user-header {
+  display: flex;
+  align-items: center;
+  padding: 60rpx 40rpx;
+  background: linear-gradient(135deg, #07c160, #10b981);
+}
+
+.avatar-wrapper {
+  background: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+  line-height: 1;
+}
+
+.avatar-wrapper::after {
+  border: none;
+}
+
+.avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(255,255,255,0.3);
+}
+
+.user-info {
+  margin-left: 30rpx;
+  color: var(--white);
+}
+
+.nickname {
+  font-size: 40rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.house-info {
+  font-size: 26rpx;
+  opacity: 0.9;
+}
+
+.bind-tip {
+  font-size: 26rpx;
+  opacity: 0.9;
+  text-decoration: underline;
+}
+
+.quick-menu {
+  background: var(--white);
+  margin: -30rpx 20rpx 20rpx;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  box-shadow: var(--shadow);
+  position: relative;
+  z-index: 1;
+}
+
+.menu-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.menu-icon {
+  font-size: 48rpx;
+  margin-bottom: 12rpx;
+}
+
+.menu-text {
+  font-size: 26rpx;
+  color: var(--text);
+}
+
+.function-list {
+  background: var(--white);
+  margin: 20rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+}
+
+.function-item {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-bottom: 1rpx solid var(--border);
+}
+
+.function-item:last-child {
+  border-bottom: none;
+}
+
+.function-icon {
+  font-size: 40rpx;
+  margin-right: 20rpx;
+}
+
+.function-text {
+  flex: 1;
+  font-size: 30rpx;
+  color: var(--text);
+}
+
+.function-arrow {
+  font-size: 28rpx;
+  color: var(--text-muted);
+}
+
+.function-item .badge {
+  position: static;
+  margin-right: 16rpx;
+}

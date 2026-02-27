@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0">
+  <title>小区业主服务小程序 - 预览</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .phone {
+      width: 375px;
+      height: 812px;
+      background: #fff;
+      border-radius: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      overflow: hidden;
+      position: relative;
+    }
+    .status-bar {
+      height: 44px;
+      background: #07c160;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .screen {
+      height: calc(100% - 44px - 83px);
+      overflow-y: auto;
+      background: #f5f5f5;
+    }
+    .tab-bar {
+      height: 83px;
+      background: #fff;
+      border-top: 1px solid #e5e5e5;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding-bottom: 20px;
+    }
+    .tab-item { text-align: center; color: #999; }
+    .tab-item.active { color: #07c160; }
+    .tab-icon { font-size: 24px; display: block; margin-bottom: 4px; }
+    .tab-text { font-size: 10px; }
+    
+    /* 首页样式 */
+    .banner {
+      height: 180px;
+      background: linear-gradient(135deg, #07c160, #10b981);
+      margin: 10px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+    .banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.3));
+    }
+    .quick-entry {
+      display: flex;
+      justify-content: space-around;
+      background: #fff;
+      margin: 10px;
+      padding: 20px 10px;
+      border-radius: 12px;
+    }
+    .entry-item { text-align: center; position: relative; }
+    .entry-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+    .entry-icon.payment { background: #fff2f0; }
+    .entry-icon.repair { background: #e6f7ff; }
+    .entry-icon.visitor { background: #f6ffed; }
+    .entry-icon.complaint { background: #fffbe6; }
+    .entry-text { font-size: 13px; color: #333; }
+    .badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background: #fa5151;
+      color: #fff;
+      font-size: 10px;
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      border-radius: 50%;
+      text-align: center;
+    }
+    
+    .section {
+      background: #fff;
+      margin: 10px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .section-title { font-size: 16px; font-weight: bold; color: #333; }
+    .more { font-size: 13px; color: #999; }
+    
+    .bill-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .bill-item:last-child { border-bottom: none; }
+    .bill-info { display: flex; flex-direction: column; }
+    .bill-type { font-size: 15px; color: #333; margin-bottom: 4px; }
+    .bill-period { font-size: 12px; color: #999; }
+    .bill-amount { text-align: right; }
+    .amount { font-size: 20px; font-weight: bold; color: #fa5151; }
+    .status { font-size: 11px; color: #fa5151; background: #fff2f0; padding: 2px 8px; border-radius: 4px; }
+    
+    .notice-item {
+      display: flex;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .notice-tag {
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 3px;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .notice-tag.top { background: #fff2f0; color: #fa5151; }
+    .notice-tag.notice { background: #e6f7ff; color: #1890ff; }
+    .notice-title {
+      flex: 1;
+      font-size: 14px;
+      color: #333;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .notice-time { font-size: 12px; color: #999; flex-shrink: 0; }
+    
+    .house-card {
+      background: linear-gradient(135deg, #07c160, #10b981);
+      margin: 10px;
+      padding: 25px;
+      border-radius: 12px;
+      color: #fff;
+    }
+    .house-title { font-size: 14px; opacity: 0.9; margin-bottom: 8px; }
+    .house-address { font-size: 20px; font-weight: bold; margin-bottom: 5px; }
+    .house-info { font-size: 13px; opacity: 0.9; }
+    
+    .nav-hint {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 12px;
+      animation: fadeOut 3s forwards;
+      animation-delay: 2s;
+    }
+    @keyframes fadeOut {
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone">
+    <div class="status-bar">智慧社区</div>
+    <div class="screen">
+      <!-- Banner -->
+      <div class="banner">
+        📢 关于小区停水通知
+      </div>
+      
+      <!-- Quick Entry -->
+      <div class="quick-entry">
+        <div class="entry-item">
+          <div class="entry-icon payment">💰</div>
+          <span class="badge">2</span>
+          <div class="entry-text">物业缴费</div>
+        </div>
+        <div class="entry-item">
+          <div class="entry-icon repair">🔧</div>
+          <div class="entry-text">报修工单</div>
+        </div>
+        <div class="entry-item">
+          <div class="entry-icon visitor">🚗</div>
+          <div class="entry-text">访客预约</div>
+        </div>
+        <div class="entry-item">
+          <div class="entry-icon complaint">📝</div>
+          <div class="entry-text">投诉建议</div>
+        </div>
+      </div>
+      
+      <!-- Bills -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">待缴费</span>
+          <span class="more">查看全部 ></span>
+        </div>
+        <div class="bill-item">
+          <div class="bill-info">
+            <span class="bill-type">物业费</span>
+            <span class="bill-period">2025年2月</span>
+          </div>
+          <div class="bill-amount">
+            <div class="amount">¥256.00</div>
+            <span class="status">待缴纳</span>
+          </div>
+        </div>
+        <div class="bill-item">
+          <div class="bill-info">
+            <span class="bill-type">停车费</span>
+            <span class="bill-period">2025年2月</span>
+          </div>
+          <div class="bill-amount">
+            <div class="amount">¥150.00</div>
+            <span class="status">待缴纳</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Notices -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-title">最新公告</span>
+          <span class="more">更多 ></span>
+        </div>
+        <div class="notice-item">
+          <span class="notice-tag top">置顶</span>
+          <span class="notice-title">关于春节期间小区安全管理的通知</span>
+          <span class="notice-time">02-10</span>
+        </div>
+        <div class="notice-item">
+          <span class="notice-tag notice">通知</span>
+          <span class="notice-title">2月15日电梯维护保养公告</span>
+          <span class="notice-time">02-08</span>
+        </div>
+        <div class="notice-item">
+          <span class="notice-tag notice">活动</span>
+          <span class="notice-title">元宵节社区活动报名开始啦</span>
+          <span class="notice-time">02-05</span>
+        </div>
+      </div>
+      
+      <!-- House Info -->
+      <div class="house-card">
+        <div class="house-title">我的房屋</div>
+        <div class="house-address">1栋 2单元 1201室</div>
+        <div class="house-info">业主：张先生 | 面积：89㎡</div>
+      </div>
+      
+      <div class="nav-hint">点击下方标签切换页面</div>
+    </div>
+    
+    <!-- Tab Bar -->
+    <div class="tab-bar">
+      <div class="tab-item active">
+        <span class="tab-icon">🏠</span>
+        <span class="tab-text">首页</span>
+      </div>
+      <div class="tab-item">
+        <span class="tab-icon">📢</span>
+        <span class="tab-text">公告</span>
+      </div>
+      <div class="tab-item">
+        <span class="tab-icon">👤</span>
+        <span class="tab-text">我的</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

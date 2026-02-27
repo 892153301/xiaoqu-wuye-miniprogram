@@ -1,0 +1,128 @@
+.category-tabs {
+  display: flex;
+  background: var(--white);
+  padding: 20rpx;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  position: relative;
+}
+
+.tab.active {
+  color: var(--primary);
+  font-weight: bold;
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40rpx;
+  height: 4rpx;
+  background: var(--primary);
+  border-radius: 2rpx;
+}
+
+.notice-list {
+  padding: 20rpx;
+}
+
+.notice-card {
+  background: var(--white);
+  border-radius: 16rpx;
+  padding: 30rpx;
+  margin-bottom: 20rpx;
+}
+
+.notice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16rpx;
+}
+
+.notice-tags {
+  display: flex;
+  gap: 12rpx;
+}
+
+.tag-top {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  background: #fff2f0;
+  color: var(--danger);
+  border-radius: 6rpx;
+}
+
+.tag-category {
+  font-size: 20rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+
+.tag-category.notice {
+  background: #e6f7ff;
+  color: #1890ff;
+}
+
+.tag-category.maintain {
+  background: #fffbe6;
+  color: #faad14;
+}
+
+.tag-category.activity {
+  background: #f6ffed;
+  color: #52c41a;
+}
+
+.notice-date {
+  font-size: 24rpx;
+  color: var(--text-muted);
+}
+
+.notice-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: var(--text);
+  display: block;
+  margin-bottom: 12rpx;
+  line-height: 1.4;
+}
+
+.notice-summary {
+  font-size: 28rpx;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.notice-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--border);
+}
+
+.author {
+  font-size: 24rpx;
+  color: var(--text-muted);
+}
+
+.view-count {
+  font-size: 24rpx;
+  color: var(--text-muted);
+}

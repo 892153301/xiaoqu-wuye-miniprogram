@@ -1,0 +1,31 @@
+<!-- 公告列表页 -->
+<view class="container">
+  <view class="category-tabs">
+    <view class="tab {{currentCategory === 'all' ? 'active' : ''}}" bindtap="switchCategory" data-category="all">全部</view>
+    <view class="tab {{currentCategory === 'notice' ? 'active' : ''}}" bindtap="switchCategory" data-category="notice">通知</view>
+    <view class="tab {{currentCategory === 'maintain' ? 'active' : ''}}" bindtap="switchCategory" data-category="maintain">维修</view>
+    <view class="tab {{currentCategory === 'activity' ? 'active' : ''}}" bindtap="switchCategory" data-category="activity">活动</view>
+  </view>
+
+  <view class="notice-list">
+    <view class="notice-card" wx:for="{{notices}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+      <view class="notice-header">
+        <view class="notice-tags">
+          <text class="tag-top" wx:if="{{item.isTop}}">置顶</text>
+          <text class="tag-category {{item.category}}">{{item.categoryName}}</text>
+        </view>
+        <text class="notice-date">{{item.publishTime}}</text>
+      </view>
+      <text class="notice-title">{{item.title}}</text>
+      <text class="notice-summary">{{item.summary}}</text>
+      <view class="notice-footer">
+        <text class="author">{{item.author}}</text>
+        <text class="view-count">阅读 {{item.viewCount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:if="{{notices.length === 0 && !loading}}">
+    <text>暂无公告</text>
+  </view>
+</view>
